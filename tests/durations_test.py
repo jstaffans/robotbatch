@@ -13,7 +13,7 @@
 # limitations under the License.
 
 import unittest
-from .. import durations
+import durations
 
 class DurationsTest(unittest.TestCase):
 
@@ -21,7 +21,10 @@ class DurationsTest(unittest.TestCase):
         d = durations.Durations()
         d.add_result_file('foo')
         d.add_result_file('bar')
-        self.assertListEqual(['foo', 'bar'], d.get_result_files())
+        self.assertEqual(2, len(d.get_result_files()))
+        self.assertEqual('foo', d.get_result_files()[0])
+        self.assertEqual('bar', d.get_result_files()[1])
+       
 
 if __name__ == '__main__':
     unittest.main()
