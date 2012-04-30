@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import xml.etree.ElementTree as xml
+
 class Durations(object):
 
     def __init__(self):
@@ -23,3 +25,12 @@ class Durations(object):
     def get_result_files(self):
         return self._result_files
 
+    def parse_results(self):
+        for result_file in self._result_files:
+            results_xml = xml.parse(result_file)
+            for child in results_xml.getiterator():
+                print child
+                print "\n"
+
+    def get_suites(self):
+        return [] 

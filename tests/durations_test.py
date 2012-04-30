@@ -24,7 +24,12 @@ class DurationsTest(unittest.TestCase):
         self.assertEqual(2, len(d.get_result_files()))
         self.assertEqual('foo', d.get_result_files()[0])
         self.assertEqual('bar', d.get_result_files()[1])
-       
+
+    def test_suite_parsing(self):
+        d = durations.Durations()
+        d.add_result_file('tests/robot_results.xml')
+        d.parse_results()
+        self.assertEqual(3, len(d.get_suites()))
 
 if __name__ == '__main__':
     unittest.main()

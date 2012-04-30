@@ -1,0 +1,153 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<result>
+  <timeStamp>20120427 16:35:10.494</timeStamp>
+  <suites>
+    <entry>
+      <string>Ui</string>
+      <suite>
+        <children>
+          <entry>
+            <string>CalendarTests</string>
+            <suite>
+              <children>
+                <entry>
+                  <!-- SUITE -->
+                  <string>Person</string>
+                  <suite>
+                    <children>
+                      <entry>
+                        <string>PersonHolidayCalendarTest</string>
+                        <suite>
+                          <parent class="suite" reference="../../../.."/>
+                          <name>PersonHolidayCalendarTest</name>
+                          <caseResults>
+                            <entry>
+                              <string>Edit_1</string>
+                              <case>
+                                <passed>true</passed>
+                                <critical>true</critical>
+                                <duration>8980</duration>
+                                <name>Edit 1</name>
+                                <parent reference="../../../.."/>
+                                <failedSince>0</failedSince>
+                              </case>
+                            </entry>
+                            <entry>
+                              <string>Edit_2</string>
+                              <case>
+                                <passed>true</passed>
+                                <critical>true</critical>
+                                <duration>11078</duration>
+                                <name>Edit 2</name>
+                                <parent reference="../../../.."/>
+                                <failedSince>0</failedSince>
+                              </case>
+                            </entry>
+                          </caseResults>
+                        </suite>
+                      </entry>
+                      <entry>
+                        <string>PersonCalendarTest</string>
+                        <suite>
+                          <parent class="suite" reference="../../../.."/>
+                          <name>PersonCalendarTest</name>
+                          <caseResults>
+                            <entry>
+                              <string>Month_View_1</string>
+                              <case>
+                                <passed>true</passed>
+                                <critical>true</critical>
+                                <duration>2429</duration>
+                                <name>Month View 1</name>
+                                <parent reference="../../../.."/>
+                                <failedSince>0</failedSince>
+                              </case>
+                            </entry>
+                            <entry>
+                              <string>Month_View_2</string>
+                              <case>
+                                <passed>true</passed>
+                                <critical>true</critical>
+                                <duration>4776</duration>
+                                <name>Month View 2</name>
+                                <parent reference="../../../.."/>
+                                <failedSince>0</failedSince>
+                              </case>
+                            </entry>
+                          </caseResults>
+                        </suite>
+                      </entry>
+                    </children>
+                    <parent class="suite" reference="../../../.."/>
+                    <name>Person</name>
+                  </suite>
+                </entry>
+              </children>
+              <parent class="suite" reference="../../../.."/>
+              <name>CalendarTests</name>
+            </suite>
+          </entry>
+          <entry>
+            <string>PersonTests</string>
+            <suite>
+              <children>
+                <entry>
+                  <string>NoteTest</string>
+                  <suite>
+                    <parent class="suite" reference="../../../.."/>
+                    <name>NoteTest</name>
+                    <caseResults>
+                      <entry>
+                        <string>Notes_1</string>
+                        <case>
+                          <passed>true</passed>
+                          <critical>true</critical>
+                          <duration>5836</duration>
+                          <name>Notes 1</name>
+                          <parent reference="../../../.."/>
+                          <failedSince>0</failedSince>
+                        </case>
+                      </entry>
+                    </caseResults>
+                  </suite>
+                </entry>
+                <entry>
+                  <!-- SUITE -->
+                  <string>List</string>
+                  <suite>
+                    <children>
+                      <entry>
+                        <string>ImportanceTests</string>
+                        <suite>
+                          <parent class="suite" reference="../../../.."/>
+                          <name>ImportanceTests</name>
+                          <caseResults>
+                            <entry>
+                              <string>High_Importance_1</string>
+                              <case>
+                                <passed>true</passed>
+                                <critical>true</critical>
+                                <duration>6111</duration>
+                                <name>High Importance 1</name>
+                                <parent reference="../../../.."/>
+                                <failedSince>0</failedSince>
+                              </case>
+                            </entry>
+                          </caseResults>
+                        </suite> 
+                      </entry>
+                    </children>
+                  </suite>
+                </entry>
+              </children>
+              <parent class="suite" reference="../../../.."/>
+              <name>PersonTests</name>
+            </suite>
+          </entry>
+        </children>
+        <parent class="result" reference="../../../.."/>
+        <name>Ui</name>
+      </suite>
+    </entry>
+  </suites>
+</result>
