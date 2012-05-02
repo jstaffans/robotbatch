@@ -18,6 +18,7 @@ class Durations(object):
 
     def __init__(self):
         self._result_files = []
+        self._durations = {} 
 
     def add_result_file(self, file):
         self._result_files.append(file)
@@ -27,10 +28,27 @@ class Durations(object):
 
     def parse_results(self):
         for result_file in self._result_files:
-            results_xml = xml.parse(result_file)
-            for child in results_xml.getiterator():
-                print child
-                print "\n"
+            suitestack = []
+            for (event, node) in xml.iterparse(result_file, ['start', 'end']):
+                if event == 'end' and node.tag == 'entry':
+                    suitestack.pop()
 
-    def get_suites(self):
-        return [] 
+                if event == 'start':
+                    if node.tag == 'entry':
+                        suitestack.append('%suite%')
+                    if node.tag == 'string' and suitestack[-1] == '%suite%':
+                        suitestack.pop()
+                        suitestack.append(node.text)
+                    if node.tag == 'duration' and node.text != None:
+                        self.add_duration(suitestack, node.text)
+
+    def add_duration(self, suitestack, duration):
+        key = '/'.join(suitestack[0:-2])
+        if key in self._durations:
+            self._durations[key] += int(duration)
+        else:
+            self._durations[key] = int(duration)
+
+    def get_durations(self):
+        return self._durations 
+

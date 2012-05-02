@@ -29,7 +29,11 @@ class DurationsTest(unittest.TestCase):
         d = durations.Durations()
         d.add_result_file('tests/robot_results.xml')
         d.parse_results()
-        self.assertEqual(3, len(d.get_suites()))
+        self.assertEqual(3, len(d.get_durations()))
+        self.assertEqual(27263, d.get_durations()['Ui/CalendarTests/Person'])
+        self.assertEqual(6111, d.get_durations()['Ui/PersonTests/List'])
+        self.assertEqual(5836, d.get_durations()['Ui/PersonTests'])
+
 
 if __name__ == '__main__':
     unittest.main()
