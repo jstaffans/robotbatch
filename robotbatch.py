@@ -15,7 +15,7 @@
 import os, sys
 from random import shuffle
 import operator
-import durations
+import durations, batchsplitter
 
 def print_help():
     print __doc__
@@ -35,39 +35,9 @@ if __name__ == '__main__':
 
         d.parse_results()
         
-        temp_durations = d.get_durations()
-        suites = []
-        for suite, suite_duration in temp_durations.iteritems():
-            suites.append(suite)
-        
-        best_suite_duration = {}
-        best_suite_to_batch = {}
-        min_max_difference = -1
+        bs = batchsplitter.BatchSplitter(d.get_durations())
+        bs.split(num_batches)
 
-        for i in range(1000):
-            shuffle(suites)
-
-            batches = {}
-            suite_to_batch = {}
-            for batch_id in range(num_batches):
-                batches['Batch%d' % batch_id] = 0
-
-            for suite in suites:
-                suite_duration = temp_durations[suite]
-                sorted_batches = sorted(batches.iteritems(), key=operator.itemgetter(1))
-                batch, value = sorted_batches[0]
-                batches[batch] += suite_duration
-                suite_to_batch[suite] = batch 
-
-            sorted_batches = sorted(batches.iteritems(), key=operator.itemgetter(1))
-            minId, minVal = sorted_batches[0]
-            maxId, maxVal = sorted_batches[-1]
-            diff = maxVal - minVal
-            if min_max_difference == -1 or  diff < min_max_difference:
-                min_max_difference = diff
-                best_suite_duration = batches
-                best_suite_to_batch = suite_to_batch
-
-        print best_suite_duration
-        print best_suite_to_batch 
+        print bs.get_batch_durations()
+        print bs.get_suites_to_batches()
 
