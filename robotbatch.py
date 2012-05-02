@@ -12,5 +12,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
+import os, sys
+import durations
 
+def print_help():
+    print __doc__
+
+def print_usage():
+    print 'Usage: robotbatch.py <result files ...>'
+
+if __name__ == '__main__':
+    if len(sys.argv) < 2:
+        print_usage()
+    else:
+        d = durations.Durations()
+        for result_file in sys.argv[1:]:
+            print "Processing " + result_file + " ..."
+            d.add_result_file(result_file)
+
+        d.parse_results()
+        
+        for suite, suite_duration in d.get_durations().iteritems(): 
+            print "%s: %d ms" % (suite, suite_duration)
