@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import xml.etree.ElementTree as xml
+import os
 
 class Durations(object):
 
@@ -43,7 +44,7 @@ class Durations(object):
                         self.add_duration(suitestack, node.text)
 
     def add_duration(self, suitestack, duration):
-        key = '/'.join(suitestack[0:-2])
+        key = os.sep.join(suitestack[0:-2])
         if key in self._durations:
             self._durations[key] += int(duration)
         else:

@@ -36,7 +36,7 @@ class BatchSplitter(object):
         batches = {}
         self._suite_to_batch = {}
         for batch_id in range(num_batches):
-            batches['Batch%d' % batch_id] = 0
+            batches['Batch%d' % (batch_id + 1)] = 0
 
         for suite in suite_names:
             suite_duration = self._suites_with_durations[suite]
