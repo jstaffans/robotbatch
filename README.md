@@ -15,11 +15,11 @@ through a Force Tags setting in the suite's \_\_init\_\_.txt file.
 
 Note that only top level suites are processed. If you have a test suite layout like this:
 
-PersonTests
-PersonTests/List
-CalendarTests
+    PersonTests
+    PersonTests/List
+    CalendarTests
 
 Then there would be two suites that can be split into batches (PersonTests and CalendarTests).
-PersonTests/__init__.txt and CalendarTests/__init__.txt would be updated.
+PersonTests/\_\_init\_\_.txt and CalendarTests/\_\_init\_\_.txt would be updated.
 
 
