@@ -42,7 +42,7 @@ if __name__ == '__main__':
         bs = batchsplitter.BatchSplitter(d.get_durations())
         bs.split(num_batches)
 
-        print 'BATCHES:'
+        print '\nBATCHES:'
         print '--------'
 
         batches = bs.get_batch_durations()
@@ -54,12 +54,13 @@ if __name__ == '__main__':
                 if suites_to_batches[suite] == batch:
                     print '  %s' % suite
 
-        print "\nNow scanning directories ...\n"
+        robot_dir = sys.argv[2]
+        print "\nNow scanning %s ...\n" % robot_dir
 
         dirs_to_batches = {}
         unknown_dirs = [] 
 
-        for dirname, dirnames, filenames in os.walk(sys.argv[2]):
+        for dirname, dirnames, filenames in os.walk(robot_dir):
             for subdirname in dirnames:
                 current_dir = os.path.join(dirname,subdirname)
                 current_dir_batch = False
@@ -82,8 +83,12 @@ if __name__ == '__main__':
 
             print '------------------------------------------------------\n'
             
-        print "Assigning directories to batches via __init__.txt files"
-        print "(old __init__.txt files will be backed up) ...\n"
+        print "Ready to assign directories to batches via __init__.txt files."
+        print "Old __init__.txt files will be backed up and overwritten."
+        print "Target directory is %s." % robot_dir
+        update_init_files = raw_input("Continue? [y/N]: ").strip()
+        if update_init_files.lower() != "y":
+            exit()
 
         for suite_dir in dirs_to_batches:
             init_file = os.sep.join([suite_dir, '__init__.txt'])
