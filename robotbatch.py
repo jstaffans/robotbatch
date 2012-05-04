@@ -26,6 +26,11 @@ def print_usage():
     print '       output dir     = parent directory of Robot test suites'
     print '       input xml file = Robot result XML file. You can enter as many files as you want.'
 
+def get_immediate_subdirectories(dir):
+    return [name for name in os.listdir(dir) 
+        if os.path.isdir(os.path.join(dir, name))]
+
+
 if __name__ == '__main__':
     if len(sys.argv) < 4:
         print_usage()
@@ -38,8 +43,8 @@ if __name__ == '__main__':
             d.add_result_file(result_file)
 
         d.parse_results()
-        
-        bs = batchsplitter.BatchSplitter(d.get_durations())
+        suite_durations = d.get_durations()
+        bs = batchsplitter.BatchSplitter(suite_durations)
         bs.split(num_batches)
 
         print '\nBATCHES:'
@@ -52,7 +57,7 @@ if __name__ == '__main__':
             print '%(batch)s (%(duration)d ms):' % {'batch': batch, 'duration': batches[batch]}
             for suite in suites_to_batches.iterkeys():
                 if suites_to_batches[suite] == batch:
-                    print '  %s' % suite
+                    print '  %(suite)s (%(duration)d ms)' % {'suite': suite, 'duration': suite_durations[suite]}
 
         robot_dir = sys.argv[2]
         print "\nNow scanning %s ...\n" % robot_dir
@@ -60,18 +65,17 @@ if __name__ == '__main__':
         dirs_to_batches = {}
         unknown_dirs = [] 
 
-        for dirname, dirnames, filenames in os.walk(robot_dir):
-            for subdirname in dirnames:
-                current_dir = os.path.join(dirname,subdirname)
-                current_dir_batch = False
-                for suite in suites_to_batches.iterkeys():
-                    if current_dir.lower().endswith(suite.lower()):
-                        current_dir_batch = suites_to_batches[suite]
-                        break
-                if current_dir_batch == False:
-                    unknown_dirs.append(current_dir)
-                else:
-                    dirs_to_batches[current_dir] = current_dir_batch
+        for subdirname in get_immediate_subdirectories(robot_dir):
+            current_dir = os.path.join(robot_dir,subdirname)
+            current_dir_batch = False
+            for suite in suites_to_batches.iterkeys():
+                if current_dir.lower().endswith(suite.lower()):
+                    current_dir_batch = suites_to_batches[suite]
+                    break
+            if current_dir_batch == False:
+                unknown_dirs.append(current_dir)
+            else:
+                dirs_to_batches[current_dir] = current_dir_batch
 
         if len(unknown_dirs) > 0:
             print 'The following directories could not be mapped to a batch - '

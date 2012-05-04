@@ -30,7 +30,7 @@ class BatchSplitterTest(unittest.TestCase):
         bs.split(1)
         batches = bs.get_batch_durations()
         self.assertEqual(1, len(batches))
-        self.assertEqual(3, batches['Batch0'])
+        self.assertEqual(3, batches['Batch1'])
 
     def test_best_split_is_found(self):
         bs = batchsplitter.BatchSplitter({'Suite1' : 2, 'Suite2' : 5, 'Suite3' : 1, 'Suite4' : 4, 'Suite5': 3})
