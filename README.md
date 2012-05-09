@@ -11,7 +11,9 @@ are gathered from the robot_results.xml files of a previous test run.
        input xml file = Robot result XML file. You can enter as many files as you want.
 
 Suites are assigned to batches called Batch1, Batch2 and so on. The assignment happens
-through a Force Tags setting in the suite's \_\_init\_\_.txt file.
+through a Force Tags setting in the suite's \_\_init\_\_.txt file. The CI environment 
+can then be set up with multiple jobs, each one executing the tests belonging to 
+a certain batch in parallel.
 
 Note that only top level suites are processed. If you have a test suite layout like this:
 
