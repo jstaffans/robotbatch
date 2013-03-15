@@ -1,7 +1,8 @@
 robot-batch
 ===========
 
-Tool for splitting robot test suites into batches for parallell execution.
+Splits Robot Framework test suites into batches for parallel execution.
+
 Suites are split empirically according to their durations. Test suite durations
 are gathered from the robot_results.xml files of a previous test run.
 
